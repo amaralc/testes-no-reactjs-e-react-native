@@ -4,12 +4,19 @@ import TechList from './index'
 
 describe('TechList component', () => {
   it('should be able to add new tech', () => {
-    const { getByText, getByTestId, debug } = render(<TechList />)
+    const { getByText, getByTestId, getByLabelText } = render(<TechList />)
 
-    debug()
-    fireEvent.click(getByText('Adicionar'))
-    debug()
+    const techListElement = getByTestId('tech-list');
+    const techInputElement = getByLabelText('Tech')
+    const techForm = getByTestId('tech-form')
+    const techValue = 'Node.js'
 
-    expect(getByTestId('tech-list')).toContainElement(getByText('Node.js'))
+    fireEvent.change(techInputElement, { target: { value: techValue } })
+    fireEvent.submit(techForm)
+
+    const addedTechElement = getByText(techValue)
+
+    expect(techListElement).toContainElement(addedTechElement)
+    expect(techInputElement).toHaveValue('')
   })
 })
