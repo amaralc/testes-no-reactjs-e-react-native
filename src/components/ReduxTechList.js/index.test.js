@@ -1,6 +1,7 @@
 import { render, fireEvent } from '@testing-library/react'
 import { useSelector, useDispatch } from 'react-redux'
 import TechList from './index'
+import { addTech } from '../../store/modules/techs/actions'
 
 jest.mock('react-redux')
 
@@ -25,14 +26,14 @@ describe('TechList component', () => {
     const techForm = getByTestId('tech-form')
     const techInputElement = getByLabelText('Tech')
     const newTech = 'Node.js'
-    const addTechAction = { type: 'ADD_TECH', payload: { tech: newTech } }
+
 
     fireEvent.change(techInputElement, { target: { value: newTech } })
     fireEvent.submit(techForm)
 
     console.log(dispatch.mock.calls)
 
-    expect(dispatch).toHaveBeenCalledWith(addTechAction)
+    expect(dispatch).toHaveBeenCalledWith(addTech(newTech))
   })
 
 })
