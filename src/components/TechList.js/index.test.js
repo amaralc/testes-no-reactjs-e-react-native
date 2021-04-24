@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom'
 import { render, fireEvent, cleanup } from '@testing-library/react'
 import TechList from './index'
 
