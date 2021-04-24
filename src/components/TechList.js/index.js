@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react"
 
-
-
 const TechList = () => {
   const [techs, setTechs] = useState([])
   const [newTech, setNewTech] = useState('')
