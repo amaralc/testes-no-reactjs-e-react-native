@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react'
-import { useSelector } from 'react-redux'
+import { render, fireEvent } from '@testing-library/react'
+import { useSelector, useDispatch } from 'react-redux'
 import TechList from './index'
 
 jest.mock('react-redux')
@@ -15,6 +15,24 @@ describe('TechList component', () => {
 
     expect(techListElement).toContainElement(techValueElementNode)
     expect(techListElement).toContainElement(techValueElementReact)
+  })
+
+  it('should be able to add new tech', () => {
+    const dispatch = jest.fn()
+    useDispatch.mockReturnValue(dispatch);
+
+    const { getByTestId, getByLabelText } = render(<TechList />)
+    const techForm = getByTestId('tech-form')
+    const techInputElement = getByLabelText('Tech')
+    const newTech = 'Node.js'
+    const addTechAction = { type: 'ADD_TECH', payload: { tech: newTech } }
+
+    fireEvent.change(techInputElement, { target: { value: newTech } })
+    fireEvent.submit(techForm)
+
+    console.log(dispatch.mock.calls)
+
+    expect(dispatch).toHaveBeenCalledWith(addTechAction)
   })
 
 })
