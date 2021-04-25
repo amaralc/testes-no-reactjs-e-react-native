@@ -5,7 +5,7 @@ export function addTech(tech) {
   }
 }
 
-export function getTechsSucces(data) {
+export function getTechsSuccess(data) {
   return {
     type: 'GET_TECHS_SUCCESS',
     payload: { data }
