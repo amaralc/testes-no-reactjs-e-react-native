@@ -8,11 +8,11 @@ jest.mock('react-redux')
 describe('TechList component', () => {
   it('should render tech list', () => {
     useSelector.mockImplementation(callback => callback({ techs: ['Node.js', 'ReactJS'] }))
-    const { getByText, getByTestId, debug } = render(<TechList />)
+    const { getByText, getByTestId } = render(<TechList />) // Destructure function debug, if needed
     const techListElement = getByTestId('tech-list')
     const techValueElementNode = getByText('Node.js')
     const techValueElementReact = getByText('ReactJS')
-    debug()
+    // debug()
 
     expect(techListElement).toContainElement(techValueElementNode)
     expect(techListElement).toContainElement(techValueElementReact)
@@ -31,7 +31,7 @@ describe('TechList component', () => {
     fireEvent.change(techInputElement, { target: { value: newTech } })
     fireEvent.submit(techForm)
 
-    console.log(dispatch.mock.calls)
+    // console.log(dispatch.mock.calls)
 
     expect(dispatch).toHaveBeenCalledWith(addTech(newTech))
   })
